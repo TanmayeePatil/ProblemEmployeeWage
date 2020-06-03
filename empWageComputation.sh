@@ -13,6 +13,8 @@ DaysPerMonth=20
 TotalHr=0
 TotalMaxHr=100
 
+declare -A dictWage
+
 function GetWorkingHours()
 {
   for (( i=1;i<$DaysPerMonth;i++ ))
@@ -30,17 +32,19 @@ function GetWorkingHours()
 	esac
 
 	TotalHr=$(( $TotalHr + $empHrs ))
-        #empSalary=$(( $empWagePerHrs * $TotalHr ))
-        #TotalEmpSalary=$(( $empSalary + $TotalEmpSalary))
+        empSalary=$(( $empWagePerHrs * $TotalHr ))
+        TotalEmpSalary=$(( $empSalary + $TotalEmpSalary))
+        dictWage[$empSalary]=$TotalEmpSalary
  done
 }
 
 #echo "Check Attendance:"
 GetWorkingHours
 
-#Calculating Salary
-#empSalary=$(( $empWagePerHrs * $empHrs ))
-#echo "----------------------------------------------"
-#echo -e "\nTotal Salary for 100hr: $TotalEmpSalary"
-
-echo -e "\nTotal Work Hours: $TotalHr"
+echo -e "\nDaily wage along with Total wage:"
+for j in "${!dictWage[@]}"
+do
+  echo $j "==>" ${dictWage[$j]}
+done
+echo "-----------------------------------------"
+echo -e "\nTotal Salary: $TotalEmpSalary"
