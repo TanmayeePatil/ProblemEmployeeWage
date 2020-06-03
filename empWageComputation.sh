@@ -13,9 +13,9 @@ DaysPerMonth=20
 TotalHr=0
 TotalMaxHr=100
 
-function ChechEmpWage()
+function GetWorkingHours()
 {
-  while [ $TotalHr -le $TotalMaxHr ]
+  for (( i=1;i<$DaysPerMonth;i++ ))
   do
         myRan=$((RANDOM%3))
         case $myRan in
@@ -30,15 +30,17 @@ function ChechEmpWage()
 	esac
 
 	TotalHr=$(( $TotalHr + $empHrs ))
-        empSalary=$(( $empWagePerHrs * $TotalHr ))
-        TotalEmpSalary=$(( $empSalary + $TotalEmpSalary))
+        #empSalary=$(( $empWagePerHrs * $TotalHr ))
+        #TotalEmpSalary=$(( $empSalary + $TotalEmpSalary))
  done
 }
 
 #echo "Check Attendance:"
-ChechEmpWage
+GetWorkingHours
 
 #Calculating Salary
-empSalary=$(( $empWagePerHrs * $empHrs ))
+#empSalary=$(( $empWagePerHrs * $empHrs ))
 #echo "----------------------------------------------"
-echo -e "\nTotal Salary for 100hr: $TotalEmpSalary"
+#echo -e "\nTotal Salary for 100hr: $TotalEmpSalary"
+
+echo -e "\nTotal Work Hours: $TotalHr"
