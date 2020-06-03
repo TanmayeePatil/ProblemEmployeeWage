@@ -34,7 +34,8 @@ function GetWorkingHours()
 	TotalHr=$(( $TotalHr + $empHrs ))
         empSalary=$(( $empWagePerHrs * $TotalHr ))
         TotalEmpSalary=$(( $empSalary + $TotalEmpSalary))
-        dictWage[$empSalary]=$TotalEmpSalary
+        DayWithDailyWage=`echo Day$i"_"$empSalary`
+        dictWage[$DayWithDailyWage]=$TotalEmpSalary
  done
 }
 
